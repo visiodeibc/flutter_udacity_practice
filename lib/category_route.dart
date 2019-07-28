@@ -3,12 +3,11 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+
 import 'category.dart';
+import 'unit.dart';
 
-// TODO: Check if we need to import anything
-
-// TODO: Define any constants
-final _backGroundColor = Colors.green[200];
+final _backgroundColor = Colors.green[100];
 
 /// Category Route (screen).
 ///
@@ -42,40 +41,60 @@ class CategoryRoute extends StatelessWidget {
     Colors.red,
   ];
 
+  /// Makes the correct number of rows for the list view.
+  ///
+  /// For portrait, we use a [ListView].
+  Widget _buildCategoryWidgets(List<Widget> categories) {
+    return ListView.builder(
+      itemBuilder: (BuildContext context, int index) => categories[index],
+      itemCount: categories.length,
+    );
+  }
+
+  /// Returns a list of mock [Unit]s.
+  List<Unit> _retrieveUnitList(String categoryName) {
+    return List.generate(10, (int i) {
+      i += 1;
+      return Unit(
+        name: '$categoryName Unit $i',
+        conversion: i.toDouble(),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: Create a list of the eight Categories, using the names and colors
-    // from above. Use a placeholder icon, such as `Icons.cake` for each
-    // Category. We'll add custom icons later.
-    List<Widget> categories = new List<Widget>();
+    final categories = <Category>[];
+
     for (var i = 0; i < _categoryNames.length; i++) {
       categories.add(Category(
-        color: _baseColors[i],
         name: _categoryNames[i],
+        color: _baseColors[i],
         iconLocation: Icons.cake,
+        units: _retrieveUnitList(_categoryNames[i]),
       ));
     }
-    // TODO: Create a list view of the Categories
+
     final listView = Container(
-      child: ListView(
-        children: categories,
-      ),
+      color: _backgroundColor,
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      child: _buildCategoryWidgets(categories),
     );
 
-    // TODO: Create an App Bar
     final appBar = AppBar(
-      centerTitle: true,
+      elevation: 0.0,
       title: Text(
-        "Unit Converter",
+        'Unit Converter',
         style: TextStyle(
-          color: Colors.amber,
+          color: Colors.black,
           fontSize: 30.0,
         ),
       ),
+      centerTitle: true,
+      backgroundColor: _backgroundColor,
     );
 
     return Scaffold(
-      backgroundColor: _backGroundColor,
       appBar: appBar,
       body: listView,
     );

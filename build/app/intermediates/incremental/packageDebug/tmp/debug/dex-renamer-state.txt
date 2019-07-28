@@ -1,4 +1,4 @@
-#Sun Jul 28 10:50:38 CST 2019
+#Sun Jul 28 21:15:56 CST 2019
 base.0=C\:\\flutter_practice\\flutter_git_practice\\udacity_course\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex
